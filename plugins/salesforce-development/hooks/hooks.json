@@ -1,12 +1,15 @@
 {
-  "Stop": [
-    {
-      "hooks": [
-        {
-          "type": "command",
-          "command": "echo '{\"systemMessage\": \"Reminder: run /salesforce-code-analysis and /deploy-to-salesforce if you modified Apex or LWC files.\"}'"
-        }
-      ]
-    }
-  ]
+  "description": "Reminds to run code analysis and deploy after modifying Apex or LWC files",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Reminder: run /salesforce-code-analysis and /deploy-to-salesforce if you modified Apex or LWC files.\"}'"
+          }
+        ]
+      }
+    ]
+  }
 }

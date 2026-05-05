@@ -1,6 +1,6 @@
 {
   "name": "salesforce-development",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Apex and LWC authoring, code analysis, deployment, and test execution for Salesforce development",
   "author": {
     "name": "mchale",
@@ -8,6 +8,5 @@
   },
   "repository": "https://github.com/chalemic/claude-plugins",
   "license": "MIT",
-  "keywords": ["salesforce", "apex", "lwc", "deployment", "testing"],
-  "hooks": "./hooks/hooks.json"
+  "keywords": ["salesforce", "apex", "lwc", "deployment", "testing"]
 }

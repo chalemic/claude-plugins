@@ -1,0 +1,25 @@
+{
+  "name": "chalemic",
+  "version": "1.0.0",
+  "description": "Personal Claude Code plugins by mchale",
+  "owner": {
+    "name": "mchale",
+    "email": "maryville.chale@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "salesforce-development",
+      "description": "Apex and LWC authoring, code analysis, deployment, and test execution for Salesforce development",
+      "source": "./plugins/salesforce-development",
+      "category": "development",
+      "version": "1.0.0",
+      "author": {
+        "name": "mchale",
+        "email": "maryville.chale@gmail.com"
+      },
+      "repository": "https://github.com/chalemic/claude-plugins",
+      "license": "MIT",
+      "keywords": ["salesforce", "apex", "lwc", "deployment", "testing"]
+    }
+  ]
+}

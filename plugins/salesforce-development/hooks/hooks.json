@@ -1,0 +1,12 @@
+{
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo '{\"systemMessage\": \"Reminder: run /salesforce-code-analysis and /deploy-to-salesforce if you modified Apex or LWC files.\"}'"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@
 
 **Guidelines:**
 - Test classes must use PascalCase and end with `Test` (For example: `AccountServiceTest`)
-- Test method names should describe the test scenario clearly (For example: `testCalculateTax_WithValidInput`)
+- Test method names should describe the test scenario clearly (For example: `testCalculateTaxWithValidInput`)
 - When writing asserts, always use the `Assert` class instead of `System.assert`
 - Always annotate the test class with `@isTest(seeAllData=false)` — never use `seeAllData=true`, as it couples tests to org data and causes flaky results
 - Tests must create all required data themselves; never rely on existing org records

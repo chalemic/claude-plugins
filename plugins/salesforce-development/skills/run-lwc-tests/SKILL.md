@@ -23,7 +23,11 @@ Create `UnitTestResults/` in the project root if it does not already exist.
 npm run test:unit -- --coverage --json --outputFile=UnitTestResults/jest-results.json --coverageDirectory=UnitTestResults/coverage --testPathPattern=<componentName>
 ```
 
-### 4. Read and interpret results
+### 4. Run accessibility tests
+
+Call `mcp__salesforce__run_lwc_accessibility_jest_tests`. This returns instructions for running Sa11y accessibility Jest tests — follow them to run accessibility tests on the modified components and report any failures alongside the Jest results.
+
+### 5. Read and interpret results
 
 Read `UnitTestResults/jest-results.json` and the coverage summary, then report based on outcome:
 
@@ -34,4 +38,7 @@ Read `UnitTestResults/jest-results.json` and the coverage summary, then report b
 **If all tests pass:**
 - Report a brief summary: components tested and pass count.
 - Report the overall code coverage percentage.
-- If overall coverage is **below 75%**, treat this as a failure — report the percentage and identify which files have the lowest individual coverage so the user knows where to focus.
+- If overall coverage is **below 75%**, treat this as a failure:
+  - Report the percentage and identify which files have the lowest individual coverage.
+  - Invoke `mcp__salesforce__orchestrate_lwc_component_testing` to get guidance on improving test coverage. This orchestrates `create_lwc_jest_tests` and `review_lwc_jest_tests` internally to analyze the component and generate suggested test cases.
+  - Present the suggested tests to the user for review — do not write them automatically.

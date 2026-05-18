@@ -12,7 +12,7 @@
       "description": "Apex and LWC authoring, code analysis, deployment, and test execution for Salesforce development",
       "source": "./plugins/salesforce-development",
       "category": "development",
-      "version": "1.1.0",
+      "version": "1.2.1",
       "author": {
         "name": "mchale",
         "email": "maryville.chale@gmail.com"

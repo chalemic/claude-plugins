@@ -1,6 +1,6 @@
 {
   "name": "salesforce-development",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "Apex and LWC authoring, code analysis, deployment, and test execution for Salesforce development",
   "author": {
     "name": "mchale",

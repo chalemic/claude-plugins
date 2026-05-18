@@ -22,7 +22,7 @@ Use this skill after writing or modifying any Apex (`.cls`, `.trigger`) or LWC (
 
 Ensure `CodeAnalysis/` exists in the project root. Create it if it does not.
 
-### 3. Run the analyzer
+### 3. Run the CLI analyzer
 
 Run the following command, replacing `<targets>` with the space-separated list of target files:
 
@@ -30,9 +30,29 @@ Run the following command, replacing `<targets>` with the space-separated list o
 sf code-analyzer run --target <targets> --output-file CodeAnalysis/results.json
 ```
 
-### 4. Read and parse results
+### 4. Run MCP analysis (in parallel with or immediately after Step 3)
 
-Read `CodeAnalysis/results.json` and group all violations by severity:
+#### For Apex files (`.cls`)
+
+For each `.cls` file in the target list, call `mcp__salesforce__scan_apex_class_for_antipatterns`:
+- `className`: derived from the filename (e.g., `AccountService` from `AccountService.cls`)
+- `apexFilePath`: absolute path to the `.cls` file
+- `directory`: the project root directory
+- `usernameOrAlias`: call `mcp__salesforce__get_username` first if the default org is not known
+
+This detects performance antipatterns the CLI does not cover: `Schema.getGlobalDescribe()` usage, SOQL without `WHERE`/`LIMIT` clauses, and SOQL queries with unused fields.
+
+#### For LWC files (`.js`, `.html`)
+
+Call `mcp__salesforce__validate_and_optimize` with:
+- `suite: "core-lwc"`
+- `targetPaths`: list of absolute paths to the LWC files being analyzed
+
+This returns a runbook — follow it exactly. The runbook will instruct you to call validators and `mcp__salesforce__score_issues` after each validator and again in aggregate. The final output includes a readiness score (0–100) and quality grade (`draft`, `prototype`, or `review-for-production`).
+
+### 5. Merge and group all findings
+
+Combine violations from the CLI results (`CodeAnalysis/results.json`) and all MCP findings into a single table grouped by severity:
 
 | Severity | Label    | Action                          |
 |----------|----------|---------------------------------|
@@ -42,14 +62,16 @@ Read `CodeAnalysis/results.json` and group all violations by severity:
 | 4        | Low      | Fix automatically               |
 | 5        | Info     | Fix automatically               |
 
-### 5. Apply automatic fixes (severity 4–5)
+For LWC files, also report the readiness score and quality grade from `mcp__salesforce__score_issues`.
+
+### 6. Apply automatic fixes (severity 4–5)
 
 For each Low and Info violation:
 - Read the affected file.
 - Apply the fix directly.
 - Briefly note what was changed and why.
 
-### 6. Discuss before fixing (severity 1–3)
+### 7. Discuss before fixing (severity 1–3)
 
 For each Critical, High, and Moderate violation, present a summary to the user:
 - File and line number
@@ -59,6 +81,6 @@ For each Critical, High, and Moderate violation, present a summary to the user:
 
 Wait for explicit user approval before making any changes for these severities.
 
-### 7. Re-run to verify
+### 8. Re-run to verify
 
-After all automatic fixes are applied, re-run the analyzer on the same target files to confirm no regressions or new violations were introduced.
+After all automatic fixes are applied, re-run the CLI analyzer on the same target files to confirm no regressions or new violations were introduced.
